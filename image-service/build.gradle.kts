@@ -61,3 +61,14 @@ dependencyManagement {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.named<Jar>("jar") {
+    isEnabled = true
+    manifest {
+        attributes["Main-Class"] = "com.example.MainApplication" // Укажите ваш главный класс
+    }
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    archiveFileName.set("my-application.jar") // Укажите имя JAR-файла
+}
