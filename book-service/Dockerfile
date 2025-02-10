@@ -1,9 +1,9 @@
 FROM gradle:8.0.0-jdk17 AS build
 WORKDIR /app
-COPY book-service/build.gradle.kts book-service/settings.gradle.kts ./
-COPY book-service/gradlew ./
-COPY book-service/gradle gradle
-COPY book-service/src ./src
+COPY build.gradle.kts settings.gradle.kts ./
+COPY gradlew ./
+COPY gradle gradle
+COPY src ./src
 RUN ./gradlew --version
 RUN ./gradlew bootJar --no-daemon --info
 

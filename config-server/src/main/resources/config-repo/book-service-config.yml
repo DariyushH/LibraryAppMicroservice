@@ -1,27 +1,24 @@
-server:
-  port: 8083
-
-spring:
-  application:
-    name: book-service
   cloud:
     consul:
       host: consul
       port: 8500
       discovery:
         enabled: true
+    config:
+
   config:
-    import:
-      - "optional:consul:"
+    import: 'optional:configserver'
+
+
   datasource:
-    url: jdbc:postgresql://user-pg-13.3:5432/postgres
+    url: jdbc:postgresql://postgres:5432/postgres
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-  liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.xml
 #  liquibase:
-#    enabled: false
+#    change-log: classpath:/db/changelog/db.changelog-master.xml
+  #  liquibase:
+  #    enabled: false
   jpa:
     hibernate:
       ddl-auto: update

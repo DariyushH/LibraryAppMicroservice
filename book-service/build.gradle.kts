@@ -32,7 +32,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.liquibase:liquibase-core")
+    //implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.cloud:spring-cloud-starter")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")

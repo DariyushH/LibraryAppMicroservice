@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:postgresql://postgres:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        connection.pool_size: 20
+        jdbc.batch_size: 20
+
+
+token:
+  signing:
+    key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+#  liquibase:
+#    change-log: classpath:/db/db.changelog-master.xml
+#    liquibase:
+#      enabled: false

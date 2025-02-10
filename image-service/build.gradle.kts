@@ -30,17 +30,18 @@ dependencies {
     implementation("org.mongodb:mongo-java-driver:3.12.14")
 
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-web:3.3.4")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-
+    implementation ("org.springframework.cloud:spring-cloud-starter-consul-config")
     implementation("org.springframework.cloud:spring-cloud-config-server")
     implementation("org.springframework.cloud:spring-cloud-starter")
-    implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
+    //implementation("org.springframework.cloud:spring-cloud-starter-consul-all:4.1.2")
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
@@ -48,7 +49,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
 }
 
@@ -61,14 +62,6 @@ dependencyManagement {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-tasks.named<Jar>("jar") {
-    isEnabled = true
-    manifest {
-        attributes["Main-Class"] = "com.example.MainApplication" // Укажите ваш главный класс
-    }
-}
-
-tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-    archiveFileName.set("my-application.jar") // Укажите имя JAR-файла
+tasks.named("jar") {
+    enabled = true
 }
