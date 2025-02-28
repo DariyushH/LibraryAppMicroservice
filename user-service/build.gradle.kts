@@ -23,8 +23,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop:3.3.4")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-web")
+
     implementation("org.springframework.cloud:spring-cloud-starter")
-//    implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
 //    developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -48,7 +48,7 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
     implementation ("org.springframework.boot:spring-boot-starter-validation")
-    implementation ("org.hibernate:hibernate-jcache:6.2.9.Final")
+//    implementation ("org.hibernate:hibernate-jcache:6.2.9.Final")
     implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
 
 }

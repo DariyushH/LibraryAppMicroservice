@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8089
 
 spring:
   application:
@@ -10,34 +10,10 @@ spring:
       port: 8500
       discovery:
         enabled: true
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
   config:
-    import:
-      - "optional:consul:"
-  datasource:
-    url: jdbc:postgresql://user-pg-13.3:5432/postgres
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-  liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.xml
-#  liquibase:
-#    enabled: false
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  servlet:
-    multipart:
-      max-file-size: 1GB
-      max-request-size: 1GB
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
-
+    import: optional:configserver:config-server
 

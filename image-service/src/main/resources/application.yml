@@ -10,33 +10,57 @@ spring:
       port: 8500
       discovery:
         enabled: true
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-  data:
-    mongodb:
-      uri: mongodb://mongo:mongo@mongo:27017
-#      username: mongo
-#      password: mongo
-  servlet:
-    multipart:
-      max-file-size: 1GB
-      max-request-size: 1GB
-
-feign:
-  client:
     config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
+      discovery:
+        enabled: true
+        service-id: config-server
+  config:
+    import: optional:configserver:config-server
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
+
+
+
+
+
+#server:
+#  port: 8084
+#
+#spring:
+#  application:
+#    name: image-service
+#  cloud:
+#    consul:
+#      host: consul
+#      port: 8500
+#      discovery:
+#        enabled: true
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#  data:
+#    mongodb:
+#      uri: mongodb://mongo:mongo@mongo:27017
+##      username: mongo
+##      password: mongo
+#  servlet:
+#    multipart:
+#      max-file-size: 1GB
+#      max-request-size: 1GB
+#
+#feign:
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always
 
 #logging:
 #  level:
