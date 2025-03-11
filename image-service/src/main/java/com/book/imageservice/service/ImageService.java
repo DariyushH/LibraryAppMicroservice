@@ -26,6 +26,8 @@ public class ImageService {
     }
 
     public String uploadImage(MultipartFile file, Long bookId) throws IOException {
+
+
         return gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename()).toString();
     }
 

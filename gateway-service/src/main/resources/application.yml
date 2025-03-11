@@ -7,21 +7,22 @@ spring:
 
   cloud:
     gateway:
-      routes:
-        - id: book-service
-          uri: lb://book-service
-          predicates:
-            - Path=/books/**
-        - id: image-service
-          uri: lb://image-service
-          predicates:
-            - Path=/images/**
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/auth/signIn,/auth/signUp
-        - id: config-server
-        - uri: lb://config-server
+      mvc:
+        routes:
+          - id: book-service
+            uri: lb://book-service
+            predicates:
+              - Path=/books/**
+          - id: image-service
+            uri: lb://image-service
+            predicates:
+              - Path=/images/**
+          - id: user-service
+            uri: lb://user-service
+            predicates:
+              - Path=/auth/signIn,/auth/signUp
+#          - id: config-server
+#          - uri: lb://config-server
 
     circuitbreaker:
       resilience4j:
