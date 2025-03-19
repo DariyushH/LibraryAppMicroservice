@@ -27,7 +27,6 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
-//    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -40,8 +39,6 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     implementation ("org.hibernate:hibernate-jcache:6.2.9.Final")
     //implementation("org.liquibase:liquibase-core")
-    //implementation ("org.springframework.boot:spring-boot-starter-data-mongodb")
-    //implementation("org.mongodb:mongo-java-driver:3.12.14")
 
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")

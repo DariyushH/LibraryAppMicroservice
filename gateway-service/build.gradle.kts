@@ -26,7 +26,6 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
     implementation ("io.github.resilience4j:resilience4j-spring-boot3:2.0.2")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
-    //implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway-mvc")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation ("org.springframework.boot:spring-boot-starter-webflux")
@@ -41,9 +40,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc:3.3.4")
 
     implementation("org.apache.commons:commons-lang3:3.0")
-    //implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-    //implementation("org.mongodb:mongodb-driver-sync:4.7.0")
-
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")

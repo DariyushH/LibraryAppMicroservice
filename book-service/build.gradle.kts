@@ -39,13 +39,9 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-//
-//    implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery:4.1.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
-    //implementation ("org.hibernate:hibernate-jcache:6.2.9.Final")
-//   implementation("org.springframework.cloud:spring-cloud-starter-consul-all:4.1.2")
-
+    implementation("org.springframework.kafka:spring-kafka")
 
 }
 
