@@ -28,7 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc:3.3.4")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
-    //implementation("org.liquibase:liquibase-core")
+    implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.cloud:spring-cloud-starter")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
@@ -42,6 +42,15 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
     implementation("org.springframework.kafka:spring-kafka")
+
+    testImplementation("org.testcontainers:testcontainers:1.20.6")
+    testImplementation("org.testcontainers:postgresql:1.20.6")
+    //testImplementation("org.testcontainers:junit-jupiter:1.20.6")
+    testImplementation("org.testcontainers:junit-jupiter:1.19.3")
+    testImplementation("org.testcontainers:kafka:1.19.3")
+    testImplementation ("org.mockito:mockito-core:5.11.0")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
+
 
 }
 
