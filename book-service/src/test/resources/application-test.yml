@@ -17,19 +17,13 @@ spring:
         enabled: true
 
   kafka:
+    consumer:
+      group-id: book_group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer:  org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      group-id: jt-group
-      auto-offset-reset: earliest
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: com.javatechie.dto
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
 
