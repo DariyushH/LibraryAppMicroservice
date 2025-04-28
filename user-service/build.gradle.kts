@@ -38,8 +38,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc:3.3.4")
     runtimeOnly("org.postgresql:postgresql")
     implementation ("org.hibernate:hibernate-jcache:6.2.9.Final")
-    //implementation("org.liquibase:liquibase-core")
-
+    implementation("org.liquibase:liquibase-core")
+    runtimeOnly ("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
@@ -47,6 +47,8 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-validation")
 //    implementation ("org.hibernate:hibernate-jcache:6.2.9.Final")
     implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
+
+    implementation("io.micrometer:micrometer-registry-prometheus:1.14.6")
 
 }
 

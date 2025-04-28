@@ -26,7 +26,8 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
+	implementation("io.micrometer:micrometer-registry-prometheus:1.14.6")
+	implementation("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
 //	implementation ("org.postgresql:postgresql")
 //	implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
 //	runtimeOnly("org.postgresql:postgresql")

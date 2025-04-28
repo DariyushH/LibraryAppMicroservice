@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config
+  labels:
+    app: config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config
+  template:
+    metadata:
+      name: config
+      labels:
+        app: config
+    spec:
+      containers:
+        - name: config
+          image: dariyush1/libraryappmicroservice-config-server
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SPRING_CLOUD_CONSUL_HOST
+              value: "consul"
+            - name: SPRING_CLOUD_CONSUL_PORT
+              value: "8500"
+            - name: SPRING_CLOUD_CONSUL_DISCOVERY_HOSTNAME
+              value: "config.default.svc.cluster.local"
+            - name: SPRING_CLOUD_CONSUL_DISCOVERY_PREFER_IP_ADDRESS
+              value: "false"
+            - name: SPRING_CLOUD_CONSUL_DISCOVERY_HEALTH_CHECK_URL
+              value: "http://config.default.svc.cluster.local:8888/actuator/health"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/actuator/prometheus"
+spec:
+  selector:
+    app: config
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888
+      name: config

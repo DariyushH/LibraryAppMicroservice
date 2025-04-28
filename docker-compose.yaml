@@ -126,12 +126,30 @@ services:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_URL=jdbc:postgresql://postgres:5432/postgres'
-      - 'SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092'
+      - 'SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka-book:9092'
     depends_on:
       consul:
         condition: service_healthy
       postgres:
         condition: service_healthy
+    networks:
+      - my-network
+
+  prometheus:
+    image: prom/prometheus:v2.37.0
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
+    ports:
+      - "9090:9090"
+    networks:
+      - my-network
+
+  grafana:
+    image: grafana/grafana:9.0.0
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
     networks:
       - my-network
 
@@ -154,7 +172,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-book:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
@@ -163,7 +181,7 @@ services:
     networks:
       - my-network
     healthcheck:
-      test: [ "CMD-SHELL", "kafka-broker-api-versions --bootstrap-server kafka:9092" ]
+      test: [ "CMD-SHELL", "kafka-broker-api-versions --bootstrap-server kafka-book:9092" ]
       interval: 10s
       timeout: 5s
       retries: 5

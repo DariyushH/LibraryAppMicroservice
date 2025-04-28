@@ -16,7 +16,7 @@ spring:
 #        connection.pool_size: 20
 #        jdbc.batch_size: 20
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: kafka-book:9092
     consumer:
       group-id: book_group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -29,7 +29,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: health, prometheus, metrics
   endpoint:
     health:
       show-details: always

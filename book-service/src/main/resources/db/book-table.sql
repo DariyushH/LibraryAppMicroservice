@@ -6,6 +6,3 @@ CREATE TABLE books
     description VARCHAR(255),
     file_id    VARCHAR(255)
 );
-
-
-

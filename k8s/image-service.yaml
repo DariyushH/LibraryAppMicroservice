@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-service
+  labels:
+    app: image-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-service
+  template:
+    metadata:
+      labels:
+        app: image-service
+    spec:
+      containers:
+        - name: image-service
+          image: dariyush1/libraryappmicroservice-image-service
+          env:
+            - name: SPRING_CLOUD_CONSUL_HOST
+              value: "consul"
+            - name: SPRING_CLOUD_CONSUL_PORT
+              value: "8500"
+            - name: SPRING_CLOUD_CONSUL_DISCOVERY_HOSTNAME
+              value: "image-service.default.svc.cluster.local"
+            - name: POSTGRES_URL
+              value: "jdbc:postgresql://postgres.default.svc.cluster.local:5432/postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: BOOTSTRAP_SERVERS
+              value: "kafka-book.default.svc.cluster.local:9092"
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8084"
+    prometheus.io/path: "/actuator/prometheus"
+spec:
+  selector:
+    app: image-service
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 8084
+      name: image-service

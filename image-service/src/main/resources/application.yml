@@ -16,3 +16,11 @@ spring:
         service-id: config-server
   config:
     import: optional:configserver:config-server
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus,health,info"
+  endpoint:
+    health:
+      show-details: always

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-service
+  labels:
+    app: book-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-service
+  template:
+    metadata:
+      labels:
+        app: book-service
+
+    spec:
+      containers:
+        - name: book-service
+          image: dariyush1/libraryappmicroservice-book-service
+          env:
+            - name: SPRING_CLOUD_CONSUL_HOST
+              value: "consul"
+            - name: SPRING_CLOUD_CONSUL_PORT
+              value: "8500"
+            - name: SPRING_CLOUD_CONSUL_DISCOVERY_HOSTNAME
+              value: "book-service.default.svc.cluster.local"
+            - name: POSTGRES_URL
+              value: "jdbc:postgresql://postgres.default.svc.cluster.local:5432/postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: BOOTSTRAP_SERVERS
+              value: "kafka-book.default.svc.cluster.local:9092"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8089"
+    prometheus.io/path: "/actuator/prometheus"
+spec:
+  selector:
+    app: book-service
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
+      name: book-service
