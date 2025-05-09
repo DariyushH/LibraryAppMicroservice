@@ -42,7 +42,7 @@ public class BookService {
 
     @KafkaListener(topics = "image_topic", groupId = "book_group")
     public void listen(String message) {
-        // Parse the message to extract bookId and fileId
+
         Map<String, String> messageMap = new HashMap<>();
         String[] pairs = message.substring(1, message.length() - 1).split(",");
         for (String pair : pairs) {
@@ -83,9 +83,10 @@ public class BookService {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if (optionalBook.isPresent()) {
             Book bookToBeUpdated = optionalBook.get();
-            bookToBeUpdated.setName(bookToBeUpdated.getName());
-            bookToBeUpdated.setAuthor(bookToBeUpdated.getAuthor());
-            bookToBeUpdated.setDescription(bookToBeUpdated.getDescription());
+            bookToBeUpdated.setName(book.getName());
+            bookToBeUpdated.setAuthor(book.getAuthor());
+            bookToBeUpdated.setDescription(book.getDescription());
+            bookToBeUpdated.setFileId(book.getFileId());
 
             bookRepository.save(bookToBeUpdated);
         }
