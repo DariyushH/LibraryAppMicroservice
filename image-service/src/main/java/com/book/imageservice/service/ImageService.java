@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.HttpHeaders;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,22 +16,28 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ImageService {
     private final GridFsTemplate gridFsTemplate;
-
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private static final String TOPIC = "image_topic";
     @Autowired
-    public ImageService(GridFsTemplate gridFsTemplate) {
+    public ImageService(GridFsTemplate gridFsTemplate, KafkaTemplate<String, String> kafkaTemplate) {
         this.gridFsTemplate = gridFsTemplate;
+        this.kafkaTemplate = kafkaTemplate;
     }
-
     public String uploadImage(MultipartFile file, Long bookId) throws IOException {
-        return gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename()).toString();
+        String fileId = gridFsTemplate.store(file.getInputStream(), file.getOriginalFilename()).toString();
+        Map<String, String> message = new HashMap<>();
+        message.put("bookId", bookId.toString());
+        message.put("fileId", fileId);
+        kafkaTemplate.send(TOPIC, message.toString());
+        return fileId;
     }
-
     public void downloadImage(String fileId, HttpServletResponse response) throws IOException {
-
         GridFSFile file = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(fileId)));
         if (file == null) {
             throw new RuntimeException("File not found with ID: " + fileId);

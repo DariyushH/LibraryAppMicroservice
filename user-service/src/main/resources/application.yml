@@ -1,36 +1,24 @@
+server:
+  port: 8082
+
 spring:
   application:
     name: user-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/users
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    properties:
-      hibernate:
-        cache:
-          use_second_level_cache: true
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  liquibase:
-    change-log: classpath:/db/db.changelog-master.xml
-  config:
-    import:
-      - "consul:"
   cloud:
     consul:
-      host: localhost
+      host: consul
       port: 8500
       discovery:
-        hostname: localhost
-        healthCheckUrl: http://localhost:8081/actuator/health
-
+        enabled: true
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+  config:
+    import: optional:configserver:config-server
 token:
   signing:
     key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
-
 management:
   endpoints:
     web:
@@ -39,10 +27,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-# Uncomment the following lines if needed
-# spring.cloud.consul.discovery.healthCheckPath: /org/info
-# spring.cloud.consul.discovery.healthCheckInterval: 30s
-
-server:
-  port: 8084

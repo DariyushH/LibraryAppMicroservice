@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/book-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/book-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/image-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/image-service.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.main.iml" />
     </modules>
   </component>
 </project>

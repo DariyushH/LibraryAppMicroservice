@@ -1,41 +1,28 @@
 server:
-  port: 8081
+  port: 8089
 
 spring:
   application:
     name: book-service
-  config:
-    import:
-      - "consul:"
   cloud:
     consul:
-      host: localhost
+      host: consul
       port: 8500
       discovery:
-        hostname: localhost
-        healthCheckUrl: http://localhost:8081/actuator/health
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-  liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.xml
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  servlet:
-    multipart:
-      max-file-size: 1GB
-      max-request-size: 1GB
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
+        enabled: true
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+  config:
+    import: optional:configserver:config-server
 
-
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: book_group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
